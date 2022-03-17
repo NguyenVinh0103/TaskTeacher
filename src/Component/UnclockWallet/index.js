@@ -11,6 +11,7 @@ import {
 import React from 'react';
 
 import {logo, imageLogo, eye} from '../../Assets';
+import LinearGradient from 'react-native-linear-gradient';
 const UnclockWallet = () => {
   return (
     <SafeAreaView style={styles.container}>
@@ -40,9 +41,18 @@ const UnclockWallet = () => {
         </View>
       </View>
       <View style={styles.Button}>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txtBtn}>Unclock</Text>
-        </TouchableOpacity>
+        <LinearGradient start={{x: 0.0, y: 0.0}} end={{x: 0, y: 1}}
+            location = { [ 1 , 1 ] } 
+           colors={['#1C94F4', '#1273EA']}    
+           style={styles.btn}>
+            <TouchableOpacity>
+              <Text style={styles.txtSend}>Send</Text>
+            </TouchableOpacity>
+         
+          <TouchableOpacity >
+            <Text style={styles.txtBtn}>Unclock</Text>
+          </TouchableOpacity>
+        </LinearGradient>
       </View>
     </SafeAreaView>
   );
