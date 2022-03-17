@@ -47,13 +47,17 @@ const ArrayData = [
 const SendAssets = () => {
   const [isVisibleModal, setVisibleModal] = useState(false);
   const [isModalNotification, setModalNotification] = useState(false);
+  const [isModalSend, setModalSend] = useState(false);
 
   const onPressModal = () => {
     setVisibleModal(!isVisibleModal);
   };
-  const alertNotification = () =>{
+  const onPressSend = () => {
+    setModalSend(!isModalSend);
+  };
+  const alertNotification = () => {
     setModalNotification(!isModalNotification);
-  }
+  };
 
   const renderItem = ({item, index}) => {
     return (
@@ -78,7 +82,7 @@ const SendAssets = () => {
       <View style={styles.From}>
         <Text style={styles.txtForm}>From</Text>
         <TextInput
-          placeholder="mY WALLET ...."
+          placeholder="My WALLET ...."
           placeholderTextColor="#000"
           secureTextEntry={true}
           style={styles.fromInput}
@@ -126,21 +130,21 @@ const SendAssets = () => {
               renderItem={renderItem}
               contentContainerStyle={styles.FlatList}
             />
-            <View style = {styles.BTNNotification}>
-              <TouchableOpacity  onPress = {alertNotification}style={styles.ButtonNotification}>
-                <Modal 
-                    isVisible={isModalNotification}
-                    animationIn="slideInUp"
-                    animationOut="slideOutDown"
-                    animationInTiming={1000}
-                    animationOutTiming={1000}>
-                  <View style = {styles.modalNotification}>
-
-                  </View>
+            <View style={styles.BTNNotification}>
+              <TouchableOpacity
+                onPress={alertNotification}
+                style={styles.ButtonNotification}>
+                <Modal
+                  isVisible={isModalNotification}
+                  animationIn="slideInUp"
+                  animationOut="slideOutDown"
+                  animationInTiming={1000}
+                  animationOutTiming={1000}>
+                  <View style={styles.modalNotification}></View>
                 </Modal>
-                
               </TouchableOpacity>
-              <TouchableOpacity onPress = {alertNotification}
+              <TouchableOpacity
+                onPress={alertNotification}
                 style={styles.btnNotification}>
                 <Text style={styles.txtNotification}>M</Text>
               </TouchableOpacity>
@@ -172,8 +176,30 @@ const SendAssets = () => {
           location={[1, 1]}
           colors={['#1C94F4', '#1273EA']}
           style={styles.btnSend}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onPressSend}>
             <Text style={styles.txtSend}>Send</Text>
+            <Modal
+              isVisible={isModalSend}
+              animationIn="slideInUp"
+              animationOut="slideOutDown"
+              animationInTiming={1000}
+              animationOutTiming={1000}>
+              <View style={styles.modalSend}>
+                <View>
+                  <Text style= {styles.txtSuccess}>SuccessFully send</Text>
+                </View>
+                
+                <View style= {styles.BodySuccess}>
+                  <Text style={styles.txtBodySuccess} >Your <Text style= {{fontWeight:'bold', color:'#000'}}>EUR</Text> has been send</Text>
+                  <Text style={styles.txtBodySuccess}>Thank you for using our service</Text>
+                </View>
+                
+                <TouchableOpacity style= {styles.btnModalSend}>
+                  <Text style={styles.txtOk}>Ok</Text>
+                </TouchableOpacity>
+              </View>
+              
+            </Modal>
           </TouchableOpacity>
         </LinearGradient>
       </View>
@@ -410,7 +436,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 32,
   },
-  ButtonNotification:{
+  ButtonNotification: {
     width: 60,
     height: 60,
     backgroundColor: '#E5E5E5',
@@ -418,21 +444,62 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 60 / 2,
   },
-  BTNNotification:{
+  BTNNotification: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom:'70%',
-    marginLeft:'40%'
+    marginBottom: '70%',
+    marginLeft: '40%',
   },
-  modalNotification:{
+  modalNotification: {
     backgroundColor: '#fff',
-    height:'30%',
-    margin: 0, 
-    borderTopLeftRadius:60,
-    borderTopRightRadius:60,
-    borderBottomRightRadius:60,
-    marginLeft:20,
+    height: '30%',
+    margin: 0,
+    borderTopLeftRadius: 60,
+    borderTopRightRadius: 60,
+    borderBottomRightRadius: 60,
+    marginLeft: 20,
     marginRight: 20,
-    marginTop:'80%'
+    marginTop: '80%',
+  },
+  modalSend:{
+    backgroundColor: '#fff',
+    height: '50%',
+    borderRadius:40,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: '20%',
+  },
+  txtSuccess:{
+    textAlign: 'center',
+    color: '#000',
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginTop:20
+  },
+  BodySuccess:{
+    marginLeft: 20,
+    marginTop: 20,
+  },
+  txtBodySuccess:{
+    fontSize:16,
+    color: '#000',
+  },
+  btnModalSend:{
+    textAlign: 'center',
+    width: '90%',
+    height:50,
+    marginTop:'50%',
+    marginRight:12,
+    marginLeft:12,
+    backgroundColor: '#2F80ED',
+    borderRadius:12,
+    justifyContent: 'center',
+    alignItems: 'center',  
+  },
+  txtOk:{
+    fontSize: 20,
+    color: '#fff',
+    fontWeight: 'bold'
   }
+
 });
