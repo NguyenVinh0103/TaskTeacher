@@ -44,7 +44,7 @@ const ArrayData = [
   },
 ];
 
-const SendAssets = () => {
+const SendAssets = ({navigation}) => {
   const [isVisibleModal, setVisibleModal] = useState(false);
   const [isModalNotification, setModalNotification] = useState(false);
   const [isModalSend, setModalSend] = useState(false);
@@ -61,21 +61,24 @@ const SendAssets = () => {
 
   const renderItem = ({item, index}) => {
     return (
-      <View style={styles.flatList}>
+      <TouchableOpacity onPress = {onPressModal} style={styles.flatList}>
         <Image style={styles.imageFlatList} source={item.image} />
         <View style={styles.textFlatList}>
           <Text style={styles.txtFlatListName}>{item.name}</Text>
           <Text style={styles.txtFlatListTitle}>{item.title}</Text>
         </View>
         <Image style={styles.iconCursor} source={item.cursor} />
-      </View>
+      </TouchableOpacity>
     );
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        <Image style={styles.iconBack} source={iconBack2} />
+        <TouchableOpacity onPress={() => navigation.navigate('SendMain')}>
+          <Image style={styles.iconBack} source={iconBack2} />
+        </TouchableOpacity>
+        
         <Text style={styles.txtContent}>Send Assets</Text>
       </View>
 
@@ -167,7 +170,7 @@ const SendAssets = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.btnBottom}>
-        <TouchableOpacity style={styles.btnCancel}>
+        <TouchableOpacity onPress = {() => navigation.navigate('SendMain')} style={styles.btnCancel}>
           <Text style={styles.txtCancel}>Cancel</Text>
         </TouchableOpacity>
         <LinearGradient
@@ -194,7 +197,7 @@ const SendAssets = () => {
                   <Text style={styles.txtBodySuccess}>Thank you for using our service</Text>
                 </View>
                 
-                <TouchableOpacity style= {styles.btnModalSend}>
+                <TouchableOpacity onPress={onPressSend} style= {styles.btnModalSend}>
                   <Text style={styles.txtOk}>Ok</Text>
                 </TouchableOpacity>
               </View>
@@ -227,6 +230,7 @@ const TXTINPUT = {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
+    backgroundColor: '#fff'
   },
   txtContent: {
     marginTop: 16,

@@ -12,7 +12,7 @@ import React from 'react';
 
 import {logo, imageLogo, eye} from '../../Assets';
 import LinearGradient from 'react-native-linear-gradient';
-const UnclockWallet = () => {
+const UnclockWallet = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -45,11 +45,8 @@ const UnclockWallet = () => {
             location = { [ 1 , 1 ] } 
            colors={['#1C94F4', '#1273EA']}    
            style={styles.btn}>
-            <TouchableOpacity>
-              <Text style={styles.txtSend}>Send</Text>
-            </TouchableOpacity>
          
-          <TouchableOpacity >
+          <TouchableOpacity onPress={() => navigation.navigate('SendMain')}>
             <Text style={styles.txtBtn}>Unclock</Text>
           </TouchableOpacity>
         </LinearGradient>
