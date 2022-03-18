@@ -21,6 +21,7 @@ import {
   iconEUR,
   iconYen,
 } from '../../Assets';
+import { normalize, normalizeHorizontal } from '../../Helps';
 
 const Data = [
   {
@@ -63,7 +64,7 @@ const SendMain = ({navigation}) => {
       />
       <View style={styles.absolute}>
         <View style={styles.header}>
-          <TouchableOpacity style={styles.btnRonin}>
+          <TouchableOpacity onPress={() => navigation.navigate('UnclockWallet')} style={styles.btnRonin}>
             <Image style={styles.Ellipse} source={Ellipse} />
             <Text style={styles.txtContent}>Ronin Wallet</Text>
           </TouchableOpacity>
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   btnRonin: {
-    width: 120,
+    width: normalizeHorizontal(160),
     height: 40,
     borderRadius: 8,
     backgroundColor: '#F7F9FC',
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
   },
   Ellipse: {
     width: 16,
-    height: 16,
+    height: normalize(16),
   },
   person: {
     width: 30,
@@ -176,15 +177,16 @@ const styles = StyleSheet.create({
   },
   Vi: {
     width: 60,
-    height: 60,
+    // height: 60,
+    aspectRatio:1
   },
   Send: {
     width: 60,
-    height: 60,
+   aspectRatio:1,
   },
   Swap: {
     width: 60,
-    height: 60,
+    aspectRatio: 1,
   },
   txtAsset: {
     color: '#000',
